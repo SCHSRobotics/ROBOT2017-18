@@ -29,54 +29,48 @@ public class PictureReader {
     Servo rr;
     Servo lr;
     static final float FORWARD_SPEED = -0.6f;
-    private ElapsedTime     runtime = new ElapsedTime();
-    public String readPicture(Telemetry telemetry, HardwareMap hardwareMap){
+    private ElapsedTime runtime = new ElapsedTime();
+
+    public String readPicture(Telemetry telemetry, HardwareMap hardwareMap) {
         boolean imageFound = false;
-            ConceptVuMarkIdentification pictureReader = new ConceptVuMarkIdentification();
-            pictureReader.initializeCamera(hardwareMap);
+        ConceptVuMarkIdentification pictureReader = new ConceptVuMarkIdentification();
+        pictureReader.initializeCamera(hardwareMap);
 
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
-            while (!imageFound) {
+        while (!imageFound) {
 
-                RelicRecoveryVuMark relicMark = pictureReader.readImage();
-                if (relicMark == RelicRecoveryVuMark.CENTER) {
+            RelicRecoveryVuMark relicMark = pictureReader.readImage();
+            if (relicMark == RelicRecoveryVuMark.CENTER) {
 
-                    telemetry.addData("Picturereader", "%s visible", relicMark);
-                    telemetry.update();
-                    return "CENTER";
-                } else if (relicMark == RelicRecoveryVuMark.RIGHT) {
+                telemetry.addData("Picturereader", "%s visible", relicMark);
+                telemetry.update();
+                return "CENTER";
+            } else if (relicMark == RelicRecoveryVuMark.RIGHT) {
 
-                    telemetry.addData("Picturereader", "%s visible", relicMark);
-                    telemetry.update();
-                    return "RIGHT";
+                telemetry.addData("Picturereader", "%s visible", relicMark);
+                telemetry.update();
+                return "RIGHT";
 
-                } else if (relicMark == RelicRecoveryVuMark.LEFT) {
+            } else if (relicMark == RelicRecoveryVuMark.LEFT) {
 
-                    telemetry.addData("Picturereader", "%s visible", relicMark);
-                    telemetry.update();
-                    return "LEFT";
-                } else if (relicMark == RelicRecoveryVuMark.UNKNOWN) {
+                telemetry.addData("Picturereader", "%s visible", relicMark);
+                telemetry.update();
+                return "LEFT";
+            } else if (relicMark == RelicRecoveryVuMark.UNKNOWN) {
 
-                    telemetry.addData("Picturereader", "%s visible", relicMark);
-                    telemetry.update();
-                } else {
-                    telemetry.addData("Picturereader", "NOTHING VISABLE", relicMark);
-                    telemetry.update();
-                }
+                telemetry.addData("Picturereader", "%s visible", relicMark);
+                telemetry.update();
+            } else {
+                telemetry.addData("Picturereader", "NOTHING VISABLE", relicMark);
+                telemetry.update();
             }
-
-    }
-    void moveArm0(float value){
-        float power=0.1f;
-
-    }
-    private void manwait(long i, long end, long end2) {
-        long start=System.currentTimeMillis();
-        while(opModeIsActive()&&start+i>System.currentTimeMillis()&&end>System.currentTimeMillis()&&end2>System.currentTimeMillis());
+        }
+        return "UNKNOWN";
     }
 }
+
 

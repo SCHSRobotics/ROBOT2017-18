@@ -2,6 +2,8 @@ package org.firstinspires.ftc.teamcode.drivers;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+
 // MovementDriver 1.0.1
 // NOT backwards compatible
 
@@ -26,11 +28,16 @@ public class MovementDriver extends Driver {
     float dpms=0;
     public boolean reachedTarget=false;
     boolean um=false;
+    public Telemetry telemetry = null;
+    public void setTelemetry(Telemetry telemetry){
+        this.telemetry = telemetry;
+    }
     //public MainOpMode.teams team;
     public void init(DcMotor[] l, boolean useMath) {
         fl = l[0];
         fr = l[1];
         if (l.length > 2) {
+
             bl = l[2];
             br = l[3];
         }
