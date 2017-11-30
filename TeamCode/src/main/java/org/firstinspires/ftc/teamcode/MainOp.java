@@ -20,39 +20,47 @@ import com.qualcomm.robotcore.hardware.Servo;
 @TeleOp(name="Main Op", group="2017")
 public class MainOp extends LinearOpMode {
     private MovementDriver drive;
+    private MovementDriver drive2;
+
     private DcMotor gun;
     DcMotor lift;
     DcMotor clct;
-    Servo rl;
-    Servo ll;
-    Servo rr;
-    Servo lr;
+    Servo rarm;
+    Servo larm;
+    Servo rightgrabber;
+    Servo leftgrabber;
     public Telemetry telemetry = new TelemetryImpl(this);
     public void runOpMode(){
         try {
-            DcMotor[] tmp={hardwareMap.dcMotor.get("fl"),hardwareMap.dcMotor.get("fr"),hardwareMap.dcMotor.get("bl"),hardwareMap.dcMotor.get("br")}; //this is our rear wheel motors.
+            DcMotor[] tmp={hardwareMap.dcMotor.get("fl"),hardwareMap.dcMotor.get("fr")}; //this is our rear wheel motors.
             drive=new MovementDriver();
             drive.telemetry = telemetry;
             drive.init(tmp, false);
-            lift=hardwareMap.dcMotor.get("lift");
-            //DcMotor[] tmp={hardwareMap.dcMotor.get("fl"),hardwareMap.dcMotor.get("fr")};
+            lift=hardwareMap.dcMotor.get("grabber");
+
+            DcMotor[] tmpRear={hardwareMap.dcMotor.get("bl"),hardwareMap.dcMotor.get("back right")};
+            drive2 = new MovementDriver();
+            drive2.init(tmpRear,false);
             //drive=new MovementDriver();
             //drive.telemetry = telemetry;
             //drive.init(tmp, false);
             //gun=hardwareMap.dcMotor.get("g");
             //lift=hardwareMap.dcMotor.get("lift");
             //clct=hardwareMap.dcMotor.get("clct");
-            //ll=hardwareMap.servo.get("ll");
-            //rl=hardwareMap.servo.get("rl");
-            //lr=hardwareMap.servo.get("lr");
-            //rr=hardwareMap.servo.get("rr");
-            //rl.setPosition(0);
-            //ll.setPosition(1);
+            larm=hardwareMap.servo.get("larm");
+            rarm=hardwareMap.servo.get("rarm");
+            leftgrabber=hardwareMap.servo.get("leftgrabber");
+            rightgrabber=hardwareMap.servo.get("rightgrabber");
+            //larm.setPosition(0);
+            //rarm.setPosition(1);
             //rr.setPosition(0);
             //lr.setPosition(1);
         }catch (Exception e){
             System.out.println("\n------    HARDWARE ERROR IN INIT!   ------\n");
             e.printStackTrace();
+            telemetry.addData("Main op", "%s error", e.toString());
+            telemetry.update();
+
         }
         try {
             waitForStart();
@@ -62,16 +70,71 @@ public class MainOp extends LinearOpMode {
         //rl.setPosition(0);
         //ll.setPosition(1);
         while (opModeIsActive()) {
-            telemetry.addData("Main op", "%s stick x", gamepad1.right_stick_y);
-            telemetry.update();
+            //telemetry.addData("Main op", "%s stick x", gamepad1.right_stick_y);
+            //telemetry.update();
             drive.setRotspeed(gamepad1.left_stick_x);
-
+            drive2.setRotspeed(-gamepad1.left_stick_x);
             drive.setSpeed(-gamepad1.right_stick_y);
-            //if(gamepad2.right_bumper)//open
-                //flapright.setPosition(0.7);
-            //if(gamepad1.left_trigger>0.2) {//close
-            //    rr.setPosition(1);
-            //    lr.setPosition(0);
+            drive2.setSpeed(gamepad1.right_stick_y);
+
+            if(gamepad1.right_trigger>.02){
+                telemetry.addData("Main op", "HERE 123");
+                telemetry.update();
+
+                leftgrabber.setDirection(Servo.Direction.REVERSE);
+                rightgrabber.setDirection(Servo.Direction.FORWARD);
+
+                leftgrabber.setPosition(0);
+                rightgrabber.setPosition(0);
+
+            }
+            else{
+                leftgrabber.setDirection(Servo.Direction.FORWARD);
+                rightgrabber.setDirection(Servo.Direction.REVERSE);
+
+                leftgrabber.setPosition(0);
+                rightgrabber.setPosition(0);
+
+            }
+
+            if(gamepad2.a) {
+                telemetry.addData("Main op", "%s arm pos", larm.getPosition());
+                telemetry.update();
+
+                larm.setDirection(Servo.Direction.REVERSE);
+
+                larm.setPosition(-.1);
+
+            }
+            if(gamepad2.b) {
+                telemetry.addData("Main op", "%s arm pos", larm.getPosition());
+                telemetry.update();
+
+                larm.setDirection(Servo.Direction.FORWARD);
+
+                    larm.setPosition(.5);
+
+
+            }
+            if(gamepad2.x) {
+                telemetry.addData("Main op", "%s arm pos", rarm.getPosition());
+                telemetry.update();
+
+                rarm.setDirection(Servo.Direction.REVERSE);
+
+                rarm.setPosition(-.1);
+
+            }
+            if(gamepad2.y) {
+                telemetry.addData("Main op", "%s arm pos", rarm.getPosition());
+                telemetry.update();
+
+                rarm.setDirection(Servo.Direction.FORWARD);
+
+                rarm.setPosition(.5);
+
+
+            }
             //}else{
             //    rr.setPosition(0);
             //    lr.setPosition(1);
@@ -84,14 +147,14 @@ public class MainOp extends LinearOpMode {
             //    ll.setPosition(0.5);
             //}
             if(gamepad2.right_trigger>0.2) {//close
-                lift.setPower(-.5);
+                lift.setPower(-.4);
                 //clct.setPower(1);
             }else{
                 lift.setPower(0);
                 //clct.setPower(0);
             }
             if(gamepad2.left_trigger>0.2) {//close
-                lift.setPower(.5);
+                lift.setPower(.4);
                 //clct.setPower(1);
             }else{
                 lift.setPower(0);
