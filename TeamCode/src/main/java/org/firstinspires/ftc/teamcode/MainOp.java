@@ -147,14 +147,14 @@ public class MainOp extends LinearOpMode {
             //    ll.setPosition(0.5);
             //}
             if(gamepad2.right_trigger>0.2) {//close
-                lift.setPower(-.4);
+                lift.setPower(-.8);
                 //clct.setPower(1);
             }else{
                 lift.setPower(0);
                 //clct.setPower(0);
             }
             if(gamepad2.left_trigger>0.2) {//close
-                lift.setPower(.4);
+                lift.setPower(.8);
                 //clct.setPower(1);
             }else{
                 lift.setPower(0);
