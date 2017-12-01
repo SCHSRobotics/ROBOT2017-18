@@ -49,8 +49,13 @@ public class MainOp extends LinearOpMode {
             //clct=hardwareMap.dcMotor.get("clct");
             larm=hardwareMap.servo.get("larm");
             rarm=hardwareMap.servo.get("rarm");
-            leftgrabber=hardwareMap.servo.get("leftgrabber");
-            rightgrabber=hardwareMap.servo.get("rightgrabber");
+            leftgrabber=hardwareMap.servo.get("leftgrab");
+            rightgrabber=hardwareMap.servo.get("rightgrab");
+            leftgrabber.setDirection(Servo.Direction.REVERSE);
+            rightgrabber.setDirection(Servo.Direction.FORWARD);
+
+            leftgrabber.setPosition(.5);
+            rightgrabber.setPosition(.5);
             //larm.setPosition(0);
             //rarm.setPosition(1);
             //rr.setPosition(0);
@@ -77,23 +82,31 @@ public class MainOp extends LinearOpMode {
             drive.setSpeed(-gamepad1.right_stick_y);
             drive2.setSpeed(gamepad1.right_stick_y);
 
-            if(gamepad1.right_trigger>.02){
-                telemetry.addData("Main op", "HERE 123");
+            if(gamepad1.a){
+                telemetry.addData("Main op", "%s arm pos", leftgrabber.getPosition());
+                telemetry.addData("Main op", "%s arm pos", leftgrabber.getDirection());
+
                 telemetry.update();
 
-                leftgrabber.setDirection(Servo.Direction.REVERSE);
-                rightgrabber.setDirection(Servo.Direction.FORWARD);
 
-                leftgrabber.setPosition(0);
-                rightgrabber.setPosition(0);
-
-            }
-            else{
                 leftgrabber.setDirection(Servo.Direction.FORWARD);
                 rightgrabber.setDirection(Servo.Direction.REVERSE);
 
                 leftgrabber.setPosition(0);
                 rightgrabber.setPosition(0);
+
+            }
+            if (gamepad1.b) {
+                telemetry.addData("Main op", "%s arm pos", leftgrabber.getPosition());
+                telemetry.addData("Main op", "%s arm pos", leftgrabber.getDirection());
+
+                telemetry.update();
+
+                leftgrabber.setDirection(Servo.Direction.REVERSE);
+                rightgrabber.setDirection(Servo.Direction.FORWARD);
+
+                leftgrabber.setPosition(.6);
+                rightgrabber.setPosition(.5);
 
             }
 
@@ -120,16 +133,16 @@ public class MainOp extends LinearOpMode {
                 telemetry.addData("Main op", "%s arm pos", rarm.getPosition());
                 telemetry.update();
 
-                rarm.setDirection(Servo.Direction.REVERSE);
+                rarm.setDirection(Servo.Direction.FORWARD);
 
-                rarm.setPosition(-.1);
+                rarm.setPosition(0);
 
             }
             if(gamepad2.y) {
                 telemetry.addData("Main op", "%s arm pos", rarm.getPosition());
                 telemetry.update();
 
-                rarm.setDirection(Servo.Direction.FORWARD);
+                rarm.setDirection(Servo.Direction.REVERSE);
 
                 rarm.setPosition(.5);
 
