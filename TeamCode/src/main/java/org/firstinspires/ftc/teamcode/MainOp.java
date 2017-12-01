@@ -56,8 +56,9 @@ public class MainOp extends LinearOpMode {
 
             leftgrabber.setPosition(.5);
             rightgrabber.setPosition(.5);
-            //larm.setPosition(0);
-            //rarm.setPosition(1);
+
+            larm.setPosition(.5);
+            rarm.setPosition(.5);
             //rr.setPosition(0);
             //lr.setPosition(1);
         }catch (Exception e){
@@ -83,30 +84,33 @@ public class MainOp extends LinearOpMode {
             drive2.setSpeed(gamepad1.right_stick_y);
 
             if(gamepad1.a){
-                telemetry.addData("Main op", "%s arm pos", leftgrabber.getPosition());
-                telemetry.addData("Main op", "%s arm pos", leftgrabber.getDirection());
-
-                telemetry.update();
-
 
                 leftgrabber.setDirection(Servo.Direction.FORWARD);
                 rightgrabber.setDirection(Servo.Direction.REVERSE);
 
                 leftgrabber.setPosition(0);
                 rightgrabber.setPosition(0);
+                telemetry.addData("Main op", "%s arm pos", leftgrabber.getPosition());
+                telemetry.addData("Main op", "%s arm pos", leftgrabber.getDirection());
+                telemetry.addData("Main op", "%s arm pos", rightgrabber.getPosition());
+                telemetry.addData("Main op", "%s arm pos", rightgrabber.getDirection());
+
+                telemetry.update();
 
             }
             if (gamepad1.b) {
-                telemetry.addData("Main op", "%s arm pos", leftgrabber.getPosition());
-                telemetry.addData("Main op", "%s arm pos", leftgrabber.getDirection());
-
-                telemetry.update();
 
                 leftgrabber.setDirection(Servo.Direction.REVERSE);
                 rightgrabber.setDirection(Servo.Direction.FORWARD);
 
-                leftgrabber.setPosition(.6);
-                rightgrabber.setPosition(.5);
+                leftgrabber.setPosition(.7);
+                rightgrabber.setPosition(.7);
+                telemetry.addData("Main op", "%s arm pos", leftgrabber.getPosition());
+                telemetry.addData("Main op", "%s arm pos", leftgrabber.getDirection());
+                telemetry.addData("Main op", "%s arm pos", rightgrabber.getPosition());
+                telemetry.addData("Main op", "%s arm pos", rightgrabber.getDirection());
+
+                telemetry.update();
 
             }
 
