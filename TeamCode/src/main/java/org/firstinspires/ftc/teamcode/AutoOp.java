@@ -14,27 +14,15 @@ import org.firstinspires.ftc.teamcode.drivers.MovementDriver;
 @TeleOp(name="Auto Op 0x03FF", group="2017")
 public class AutoOp extends LinearOpMode {
     private MovementDriver drive;
-    private DcMotor gun;
     DcMotor lift;
-    DcMotor clct;
     static final float FORWARD_SPEED = -0.6f;
     private ElapsedTime runtime = new ElapsedTime();
     public void runOpMode(){
         try {
-            DcMotor[] tmp={hardwareMap.dcMotor.get("fl"),hardwareMap.dcMotor.get("fr")};
+            DcMotor[] tmp={hardwareMap.dcMotor.get("fl"),hardwareMap.dcMotor.get("fr"),hardwareMap.dcMotor.get("bl"),hardwareMap.dcMotor.get("br")};
             drive=new MovementDriver();
             drive.init(tmp, false);
-            gun=hardwareMap.dcMotor.get("g");
             lift=hardwareMap.dcMotor.get("lift");
-            clct=hardwareMap.dcMotor.get("clct");
-            ll=hardwareMap.servo.get("ll");
-            rl=hardwareMap.servo.get("rl");
-            lr=hardwareMap.servo.get("lr");
-            rr=hardwareMap.servo.get("rr");
-            rl.setPosition(0);
-            ll.setPosition(1);
-            rr.setPosition(0);
-            lr.setPosition(1);
         }catch (Exception e){
             System.out.println("\n------    HARDWARE ERROR IN INIT!   ------\n");
             e.printStackTrace();
@@ -45,8 +33,6 @@ public class AutoOp extends LinearOpMode {
             e.printStackTrace();
 
         }
-        rl.setPosition(0.5);
-        ll.setPosition(1);
         sleep(2000);
         drive.setSpeed(FORWARD_SPEED);
         runtime.reset();
