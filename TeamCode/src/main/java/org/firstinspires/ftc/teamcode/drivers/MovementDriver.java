@@ -2,8 +2,6 @@ package org.firstinspires.ftc.teamcode.drivers;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
-import org.firstinspires.ftc.robotcore.external.Telemetry;
-
 // MovementDriver 1.0.1
 // NOT backwards compatible
 
@@ -13,12 +11,6 @@ public class MovementDriver extends Driver {
     public DcMotor fr=null;
     public DcMotor bl=null;
     public DcMotor br=null;
-    public Servo lsluff;
-    public Servo rsluff;
-    //ColorSensor csensor;
-    //DeviceInterfaceModule cdim;
-    public OrientationPoint target;
-    private OrientationPoint location;
     private float speed=0;
     private float rotspeed=0;
     public boolean knowsLocation=false;
@@ -28,19 +20,18 @@ public class MovementDriver extends Driver {
     float dpms=0;
     public boolean reachedTarget=false;
     boolean um=false;
-    public Telemetry telemetry = null;
-    public void setTelemetry(Telemetry telemetry){
-        this.telemetry = telemetry;
-    }
-    //public MainOpMode.teams team;
+    private boolean fourwheeldrive=false;
+    OrientationPoint location;
+    OrientationPoint target;
     public void init(DcMotor[] l, boolean useMath) {
         fl = l[0];
         fr = l[1];
         if (l.length > 2) {
-
             bl = l[2];
             br = l[3];
+            fourwheeldrive=true;
         }
+        um=useMath;
     }
     public void update() {
         reachedTarget = false;
@@ -79,24 +70,24 @@ public class MovementDriver extends Driver {
         location.rotation+=rotspeed*dpms;
     }
     public void setRotspeed(float s){
-        //calculatePosition();
+        calculatePosition();
         float r=(s-rotspeed)/2;
         float l=(rotspeed+s)/2;
         fl.setPower(l);
         fr.setPower(r);
-        if(bl!=null) {
+        if(fourwheeldrive) {
             bl.setPower(l);
             br.setPower(r);
         }
         speed=s;
     }
     public void setSpeed(float s){
-        //calculatePosition();
+        calculatePosition();
         float r=(speed-s)/2;
         float l=(speed+s)/2;
         fl.setPower(l);
         fr.setPower(r);
-        if(bl!=null) {
+        if(fourwheeldrive) {
             bl.setPower(l);
             br.setPower(r);
         }
@@ -118,7 +109,7 @@ public class MovementDriver extends Driver {
         fl.setPower(tx);
         //fr.setMode(DcMotorController.RunMode.RESET_ENCODERS);
         fr.setPower(-tx);
-        if(bl!=null) {
+        if(fourwheeldrive) {
             //bl.setMode(DcMotorController.RunMode.RESET_ENCODERS);
             bl.setPower(tx);
             //br.setMode(DcMotorController.RunMode.RESET_ENCODERS);
