@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.drivers.MovementDriver;
+import org.firstinspires.ftc.teamcode.drivers.ServoFlapDriver1712;
 
 /**
  * Created by dylanbrophy on 12/3/2017.
@@ -14,7 +15,7 @@ import org.firstinspires.ftc.teamcode.drivers.MovementDriver;
 @TeleOp(name="Auto Op 0x03FF", group="2017")
 public class AutoOp extends LinearOpMode {
     private MovementDriver drive;
-    DcMotor lift;
+    private ServoFlapDriver1712 flaps;
     static final float FORWARD_SPEED = -0.6f;
     private ElapsedTime runtime = new ElapsedTime();
     public void runOpMode(){
@@ -22,7 +23,7 @@ public class AutoOp extends LinearOpMode {
             DcMotor[] tmp={hardwareMap.dcMotor.get("fl"),hardwareMap.dcMotor.get("fr"),hardwareMap.dcMotor.get("bl"),hardwareMap.dcMotor.get("br")};
             drive=new MovementDriver();
             drive.init(tmp, false);
-            lift=hardwareMap.dcMotor.get("lift");
+            flaps=new ServoFlapDriver1712(hardwareMap.servo.get("larm"),hardwareMap.servo.get("rarm"));
         }catch (Exception e){
             System.out.println("\n------    HARDWARE ERROR IN INIT!   ------\n");
             e.printStackTrace();
@@ -45,12 +46,12 @@ public class AutoOp extends LinearOpMode {
 
         while (opModeIsActive() && (runtime.seconds() < 8.0)) {
             System.out.println("Firing mode");
-            gun.setPower(1);
+            //gun.setPower(1);
             sleep(400);
-            gun.setPower(0);
+            //gun.setPower(0);
             sleep(100);
         }
-        gun.setPower(0);
+        //gun.setPower(0);
     }
     private void manwait(long i, long end, long end2) {
         long start=System.currentTimeMillis();

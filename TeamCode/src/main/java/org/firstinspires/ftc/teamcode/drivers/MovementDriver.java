@@ -35,7 +35,7 @@ public class MovementDriver extends Driver {
     }
     public void update() {
         reachedTarget = false;
-        calculatePosition();
+        //calculatePosition();
         if (!knowsLocation) {
             if (!started) {
                 setSpeed(0);
@@ -70,11 +70,11 @@ public class MovementDriver extends Driver {
         location.rotation+=rotspeed*dpms;
     }
     public void setRotspeed(float s){
-        calculatePosition();
+        //calculatePosition();
         float r=(s-rotspeed)/2;
         float l=(rotspeed+s)/2;
-        fl.setPower(l);
-        fr.setPower(r);
+        fl.setPower(-l);
+        fr.setPower(-r);
         if(fourwheeldrive) {
             bl.setPower(l);
             br.setPower(r);
@@ -82,11 +82,11 @@ public class MovementDriver extends Driver {
         speed=s;
     }
     public void setSpeed(float s){
-        calculatePosition();
+        //calculatePosition();
         float r=(speed-s)/2;
         float l=(speed+s)/2;
-        fl.setPower(l);
-        fr.setPower(r);
+        fl.setPower(-l);
+        fr.setPower(-r);
         if(fourwheeldrive) {
             bl.setPower(l);
             br.setPower(r);
@@ -106,9 +106,9 @@ public class MovementDriver extends Driver {
     public void setTargetRotation(double t){
         double tx=t/100;
         //fl.setMode(DcMotorController.RunMode.RESET_ENCODERS);
-        fl.setPower(tx);
+        fl.setPower(-tx);
         //fr.setMode(DcMotorController.RunMode.RESET_ENCODERS);
-        fr.setPower(-tx);
+        fr.setPower(tx);
         if(fourwheeldrive) {
             //bl.setMode(DcMotorController.RunMode.RESET_ENCODERS);
             bl.setPower(tx);

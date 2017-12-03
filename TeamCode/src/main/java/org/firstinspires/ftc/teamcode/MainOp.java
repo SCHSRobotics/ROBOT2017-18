@@ -20,7 +20,6 @@ import com.qualcomm.robotcore.hardware.Servo;
 @TeleOp(name="Main Op", group="2017")
 public class MainOp extends LinearOpMode {
     private MovementDriver drive;
-    private MovementDriver drive2;
 
     private DcMotor gun;
     DcMotor lift;
@@ -32,15 +31,11 @@ public class MainOp extends LinearOpMode {
     public Telemetry telemetry = new TelemetryImpl(this);
     public void runOpMode(){
         try {
-            DcMotor[] tmp={hardwareMap.dcMotor.get("fl"),hardwareMap.dcMotor.get("fr")}; //this is our rear wheel motors.
+            DcMotor[] tmp={hardwareMap.dcMotor.get("fl"),hardwareMap.dcMotor.get("fr"),hardwareMap.dcMotor.get("bl"),hardwareMap.dcMotor.get("br")}; //this is our rear wheel motors.
             drive=new MovementDriver();
-            drive.telemetry = telemetry;
+            //drive.telemetry = telemetry;
             drive.init(tmp, false);
             lift=hardwareMap.dcMotor.get("grabber");
-
-            DcMotor[] tmpRear={hardwareMap.dcMotor.get("bl"),hardwareMap.dcMotor.get("back right")};
-            drive2 = new MovementDriver();
-            drive2.init(tmpRear,false);
             //drive=new MovementDriver();
             //drive.telemetry = telemetry;
             //drive.init(tmp, false);
@@ -79,9 +74,7 @@ public class MainOp extends LinearOpMode {
             //telemetry.addData("Main op", "%s stick x", gamepad1.right_stick_y);
             //telemetry.update();
             drive.setRotspeed(gamepad1.left_stick_x);
-            drive2.setRotspeed(-gamepad1.left_stick_x);
-            drive.setSpeed(-gamepad1.right_stick_y);
-            drive2.setSpeed(gamepad1.right_stick_y);
+            drive.setSpeed(gamepad1.right_stick_y);
 
             if(gamepad1.a){
 
