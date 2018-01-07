@@ -29,6 +29,7 @@ public class MainOp extends LinearOpMode {
     Servo larm;
     Servo rightgrabber;
     Servo leftgrabber;
+    Servo relicarm;
     ServoFlapDriver1712 flaps;
     public Telemetry telemetry = new TelemetryImpl(this);
     public void runOpMode(){
@@ -41,9 +42,11 @@ public class MainOp extends LinearOpMode {
             rightgrabber=hardwareMap.servo.get("rightgrab");
             leftgrabber.setDirection(Servo.Direction.REVERSE);
             rightgrabber.setDirection(Servo.Direction.FORWARD);
-
+            relicarm=hardwareMap.servo.get("relicarm");
+            relicarm.setPosition(0);
             leftgrabber.setPosition(.5);
             rightgrabber.setPosition(.5);
+            relicarm.setPosition(0);
             flaps=new ServoFlapDriver1712(hardwareMap.servo.get("larm"),hardwareMap.servo.get("rarm"),(ModernRoboticsI2cColorSensor)hardwareMap.colorSensor.get("rc"),(ModernRoboticsI2cColorSensor)hardwareMap.colorSensor.get("lc"));
         }catch (Exception e){
             System.out.println("\n------    HARDWARE ERROR IN INIT!   ------\n");
@@ -130,7 +133,12 @@ public class MainOp extends LinearOpMode {
                 lift.setPower(0);
                 //clct.setPower(0);
             }
-
+            if(gamepad1.right_trigger > 0){
+                relicarm.setPosition(1);
+            }
+            if(gamepad1.left_trigger > 0){
+                relicarm.setPosition(0);
+            }
         }
     }
 }

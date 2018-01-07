@@ -51,7 +51,7 @@ public class ServoFlapDriver1712 {
     }
     public void flapLeftUp(){
         larm.setDirection(Servo.Direction.FORWARD);
-        larm.setPosition(.4);
+        larm.setPosition(.2);
     }
     public void flapRightUp(){
         rarm.setDirection(Servo.Direction.REVERSE);
@@ -67,9 +67,8 @@ public class ServoFlapDriver1712 {
 
     }
     public float[] readRight(Telemetry telemetry){
-        telemetry.addData("device",rs.getDeviceName());
-        telemetry.addData("led", rs.isLightOn());
-        telemetry.update();
+        rs.enableLed(false);
+        sleep(1000);
         rs.enableLed(true);
         NormalizedRGBA result = rs.getNormalizedColors();
         float[] r = {result.red, result.blue};

@@ -43,13 +43,13 @@ public class R1Auto extends LinearOpMode {
 
             leftgrabber.setPosition(.5);
             rightgrabber.setPosition(.5);
-            flaps = new ServoFlapDriver1712(hardwareMap.servo.get("larm"), hardwareMap.servo.get("rarm"), (ModernRoboticsI2cColorSensor)hardwareMap.colorSensor.get("rightcolor"), (ModernRoboticsI2cColorSensor)hardwareMap.colorSensor.get("leftcolor"));
+
+            flaps = new ServoFlapDriver1712(hardwareMap.servo.get("larm"), hardwareMap.servo.get("rarm"), (ModernRoboticsI2cColorSensor)hardwareMap.colorSensor.get("rc"), (ModernRoboticsI2cColorSensor)hardwareMap.colorSensor.get("lc"));
             flaps.flapRightUp();
             flaps.flapLeftUp();
             DcMotor[] tmp={hardwareMap.dcMotor.get("fl"),hardwareMap.dcMotor.get("fr"),hardwareMap.dcMotor.get("bl"),hardwareMap.dcMotor.get("br")}; //this is our rear wheel motors.
             drive=new MovementDriver();
             drive.init(tmp, false);
-
 
         }catch (Exception e){
             System.out.println("\n------    HARDWARE ERROR IN INIT!   ------\n");
@@ -63,10 +63,9 @@ public class R1Auto extends LinearOpMode {
 
         boolean imageFound = false;
 
-        while (opModeIsActive()) {
+        //while (opModeIsActive()) {
 
 //
-            flaps = new ServoFlapDriver1712(hardwareMap.servo.get("larm"), hardwareMap.servo.get("rarm"), (ModernRoboticsI2cColorSensor)hardwareMap.colorSensor.get("rc"), (ModernRoboticsI2cColorSensor)hardwareMap.colorSensor.get("lc"));
 //            PictureReader pr = new PictureReader();
 //
 //            for (int i = 0; i> 20; i++) {
@@ -78,40 +77,46 @@ public class R1Auto extends LinearOpMode {
 //                    break;
 //                }
 //            }
-            sleep(2000);
             //TODO: Lower Right arm
 
-            flaps.flapRightDown();
+        flaps.flapRightDown();
+        sleep(750);
 
-            //TODO: read color
-            float[] color = flaps.readRight(telemetry);
+        //TODO: read color
+        float[] color = flaps.readRight(telemetry);
 
+        telemetry.addData("R0", "%s Color R 0", color[0]);
+        telemetry.addData("R1", "%s Color R 1", color[1]);
+        telemetry.update();
 
-            telemetry.addData("R0", "%s Color R 0", color[0]);
+        if(color[0] > color[1]){ //red
+            drive.setSpeed(-.2f);
+            sleep(400);
+            flaps.flapLeftUp();
 
+            //drive.setSpeed(.2f);
+            //sleep(400);
+            drive.setSpeed(0);
+            drive.setSpeed(-.7f);
+            sleep(800);
 
-            telemetry.addData("R1", "%s Color R 1", color[1]);
-            telemetry.update();
+        }
+        if(color[1] > color[0]){ //blue
 
+            drive.setSpeed(.2f);
+            sleep(400);
+            drive.setSpeed(0);
+            flaps.flapLeftUp();
+            sleep(750);
+            drive.setSpeed(-.2f);
+            sleep(400);
+            drive.setSpeed(-.7f);
+            sleep(1070);
+            drive.setSpeed(0);
+        }
 
-            if(color[0] > 0){
-                drive.setSpeed(.2f);
-                sleep(200);
-                drive.setSpeed(0);
-                drive.setSpeed(-.2f);
-                sleep(200);
-                drive.setSpeed(0);
+            flaps.flapRightUp();
 
-            }
-            if(color[1] > 0){
-                drive.setSpeed(-.2f);
-                sleep(200);
-                drive.setSpeed(0);
-                drive.setSpeed(.2f);
-                sleep(200);
-                drive.setSpeed(0);
-
-            }
             /*color = flaps.readLeft(telemetry);
 
 
@@ -153,7 +158,6 @@ public class R1Auto extends LinearOpMode {
             //          }
 
         }
-        flaps.flapRightUp();
         //pull out to its own class
 
 
@@ -162,7 +166,7 @@ public class R1Auto extends LinearOpMode {
 
 
 
-    }
+    //}
     void moveArm0(float value){
         float power=0.1f;
 
