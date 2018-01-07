@@ -20,16 +20,6 @@ import org.firstinspires.ftc.robotcore.internal.opmode.TelemetryImpl;
 
 @TeleOp(name="Autotomomus Picture Reader", group="2017")
 public class PictureReader {
-    private MovementDriver drive;
-    private DcMotor gun;
-    DcMotor lift;
-    DcMotor clct;
-    Servo rl;
-    Servo ll;
-    Servo rr;
-    Servo lr;
-    static final float FORWARD_SPEED = -0.6f;
-    private ElapsedTime runtime = new ElapsedTime();
 
     public String readPicture(Telemetry telemetry, HardwareMap hardwareMap) {
         boolean imageFound = false;
@@ -61,12 +51,15 @@ public class PictureReader {
                 telemetry.update();
                 return "LEFT";
             } else if (relicMark == RelicRecoveryVuMark.UNKNOWN) {
-
                 telemetry.addData("Picturereader", "%s visible", relicMark);
                 telemetry.update();
+                return "UNKNOWN";
+
             } else {
                 telemetry.addData("Picturereader", "NOTHING VISABLE", relicMark);
                 telemetry.update();
+                return "UNKNOWN";
+
             }
         }
         return "UNKNOWN";

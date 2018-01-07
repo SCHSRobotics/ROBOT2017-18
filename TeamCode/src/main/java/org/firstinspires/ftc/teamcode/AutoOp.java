@@ -51,7 +51,23 @@ public class AutoOp extends LinearOpMode {
             //gun.setPower(0);
             sleep(100);
         }
-        //gun.setPower(0);
+        flaps.flapLeftDown();
+        flaps.flapRightDown();
+
+        //TODO: read colors
+        //TODO: detect correct sensor
+
+        //TODO: if red rotate Couterclockwise
+        //TODO: if blue rotate clockwise
+        //TODO: Raise arm
+        //TODO: Recenter
+        //TODO: move forward to P(left), P(center), P(right)
+        //TODO: rotate Counter Clockwise
+        //TODO: drive fowards
+        //TODO: realease arm
+        //TODO: drive backwards
+        //TODO: close arm
+        //TODO: drive forward
     }
     private void manwait(long i, long end, long end2) {
         long start=System.currentTimeMillis();
