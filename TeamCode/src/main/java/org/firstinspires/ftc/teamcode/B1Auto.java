@@ -112,7 +112,12 @@ public class B1Auto extends LinearOpMode {
             drive.setSpeed(-.7f);
             sleep(800);
         }
-
+        leftgrabber.setPosition(0.7f);
+        rightgrabber.setPosition(0.7f);
+        sleep(400);
+        drive.setSpeed(-1);
+        sleep(100);
+        drive.setSpeed(0);
             /*color = flaps.readLeft(telemetry);
 
 

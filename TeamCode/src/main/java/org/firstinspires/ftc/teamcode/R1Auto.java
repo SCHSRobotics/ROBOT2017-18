@@ -80,6 +80,9 @@ public class R1Auto extends LinearOpMode {
             //TODO: Lower Right arm
 
         flaps.flapRightDown();
+
+        leftgrabber.setPosition(0);
+        rightgrabber.setPosition(0);
         sleep(750);
 
         //TODO: read color
@@ -92,31 +95,34 @@ public class R1Auto extends LinearOpMode {
         if(color[0] > color[1]){ //red
             drive.setSpeed(-.2f);
             sleep(400);
-            flaps.flapLeftUp();
-
+            flaps.flapRightUp();
+            sleep(750);
             //drive.setSpeed(.2f);
             //sleep(400);
             drive.setSpeed(0);
             drive.setSpeed(-.7f);
-            sleep(800);
+            sleep(700);
 
         }
         if(color[1] > color[0]){ //blue
 
-            drive.setSpeed(.2f);
+            drive.setSpeed(.3f);
             sleep(400);
             drive.setSpeed(0);
-            flaps.flapLeftUp();
+            flaps.flapRightUp();
             sleep(750);
             drive.setSpeed(-.2f);
-            sleep(400);
+            sleep(300);
             drive.setSpeed(-.7f);
             sleep(1070);
             drive.setSpeed(0);
         }
-
-            flaps.flapRightUp();
-
+        leftgrabber.setPosition(0.7f);
+        rightgrabber.setPosition(0.7f);
+        sleep(400);
+        drive.setSpeed(-1);
+        sleep(100);
+    drive.setSpeed(0);
             /*color = flaps.readLeft(telemetry);
 
 
