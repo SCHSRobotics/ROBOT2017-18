@@ -90,11 +90,10 @@ public class B1Auto extends LinearOpMode {
         telemetry.update();
 
         if(color[0] > color[1]){ //red
+            telemetry.addData("RED DETECTED!", "RED_RED_RED!!");
             drive.setSpeed(.2f);
             sleep(400);
-            drive.setSpeed(0);
             flaps.flapLeftUp();
-            sleep(750);
             drive.setSpeed(-.2f);
             sleep(400);
             drive.setSpeed(-.7f);
@@ -102,15 +101,12 @@ public class B1Auto extends LinearOpMode {
             drive.setSpeed(0);
         }
         if(color[1] > color[0]){ //blue
+            telemetry.addData("BLUE DETECTED!", "BLUE_BLE_BLUE!!!!!!");
             drive.setSpeed(-.2f);
-            sleep(400);
-            flaps.flapLeftUp();
-
-            //drive.setSpeed(.2f);
-            //sleep(400);
-            drive.setSpeed(0);
-            drive.setSpeed(-.7f);
             sleep(600);
+            flaps.flapLeftUp();
+            drive.setSpeed(-.7f);
+            sleep(550);
         }
         leftgrabber.setPosition(0.7f);
         rightgrabber.setPosition(0.7f);
@@ -157,7 +153,7 @@ public class B1Auto extends LinearOpMode {
         //TODO: close arm
         //TODO: drive forward
         //          }
-
+        while(this.opModeIsActive());
     }
     //pull out to its own class
 
