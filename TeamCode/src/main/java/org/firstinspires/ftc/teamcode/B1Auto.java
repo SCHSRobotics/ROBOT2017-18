@@ -98,7 +98,7 @@ public class B1Auto extends LinearOpMode {
             drive.setSpeed(-.2f);
             sleep(400);
             drive.setSpeed(-.7f);
-            sleep(1070);
+            sleep(1000);
             drive.setSpeed(0);
         }
         if(color[1] > color[0]){ //blue
@@ -110,7 +110,7 @@ public class B1Auto extends LinearOpMode {
             //sleep(400);
             drive.setSpeed(0);
             drive.setSpeed(-.7f);
-            sleep(800);
+            sleep(600);
         }
         leftgrabber.setPosition(0.7f);
         rightgrabber.setPosition(0.7f);
