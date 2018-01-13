@@ -65,8 +65,8 @@ public class MainOp extends LinearOpMode {
         while (opModeIsActive()) {
             //telemetry.addData("Main op", "%s stick x", gamepad1.right_stick_y);
             //telemetry.update();
-            drive.setRotspeed(gamepad1.left_stick_x);
-            drive.setSpeed(gamepad1.right_stick_y);
+            drive.setRotspeed(gamepad1.left_stick_x*.7f);
+            drive.setSpeed(gamepad1.right_stick_y*.7f);
             telemetry.addData("Main op", "%s forward power", gamepad1.right_stick_y);
             telemetry.addData("Main op", "%s rotation power", gamepad1.left_stick_y);
             telemetry.update();
