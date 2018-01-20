@@ -67,14 +67,15 @@ public class ServoFlapDriver1712 {
 
     }
     public float[] readRight(Telemetry telemetry){
-        rs.enableLed(false);
-        sleep(1000);
-        rs.enableLed(true);
         NormalizedRGBA result = rs.getNormalizedColors();
         float[] r = {result.red, result.blue};
         return r;
     }
 
+    public float[] readRightAlt(){
+        float[] r = {rs.red(),rs.green()};
+        return r;
+    }
 
     public int getValue(){
         int[] dr={0,0,0,0};
