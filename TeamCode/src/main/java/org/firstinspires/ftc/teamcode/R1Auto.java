@@ -79,17 +79,14 @@ public class R1Auto extends LinearOpMode {
 //            }
             //TODO: Lower Right arm
         flaps.flapRightDown();
-        sleep(750);
+        sleep(2000);
 
         //TODO: read color
         float[] color = flaps.readRight(telemetry);
-
-        telemetry.addData("R0", "%s Color R 0", color[0]);
-        telemetry.addData("R1", "%s Color R 1", color[1]);
-        telemetry.update();
-
-        if(color[0] < color[1]){ //bleu
-            telemetry.addData("BLUE DETECTED!", "BLUE_BLE_BLUE!!!!!!");
+        int value = Float.compare(color[0],color[1]);
+        if(value < 0){ //blue
+            telemetry.addData("BLUE ", "BLUE");
+            telemetry.update();
             drive.setSpeed(.2f);
             sleep(400);
             drive.setSpeed(0);
@@ -100,42 +97,17 @@ public class R1Auto extends LinearOpMode {
             drive.setSpeed(-.7f);
             sleep(1370);
         }
-        if(color[1] < color[0]){ //red
-            telemetry.addData("RED DETECTED!", "RED_RED_RED!!");
+        if(value >0){ //red
+            telemetry.addData("RED", "RED");
             drive.setSpeed(-.15f);
-            sleep(1300);
+            sleep(500);
+            drive.setSpeed(0);
             flaps.flapRightUp();
-            sleep(100);
+            drive.setSpeed(-.7f);
+            sleep(1300);
         }
         drive.setSpeed(0);
 
-            /*color = flaps.readLeft(telemetry);
-
-
-            telemetry.addData("R1", "%s Color L0", color[0]);
-            telemetry.update();
-            sleep(2000);
-            telemetry.addData("R1", "%s Color L1", color[1]);
-            telemetry.update();
-            sleep(2000);
-            telemetry.addData("R1", "%s Color L2", color[2]);
-            telemetry.update();
-            sleep(2000);
-            telemetry.addData("R1", "%s Color L3", color[4]);
-            telemetry.update();
-            sleep(2000);
-
-            //telemetry.addData("L1", "%s Color", color.toString());
-            //telemetry.addData("Q", "%s V", flaps.getValue());
-*/
-            /*telemetry.update();
-            sleep(2000);
-
-            int test = flaps.getValue();
-            telemetry.addData("R1", "%s Color value", test);
-            telemetry.update();
-*/
-            //flaps.flapRightUp();
             //TODO: if red rotate Couterclockwise
             //TODO: if blue rotate clockwise
             //TODO: Raise arm

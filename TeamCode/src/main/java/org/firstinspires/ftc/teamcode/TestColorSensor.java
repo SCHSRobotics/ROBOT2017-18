@@ -66,35 +66,36 @@ public class TestColorSensor extends LinearOpMode {
         flaps.flapRightDown();
         while (opModeIsActive()) {
 
+            sleep(2000);
             //TODO: read color
             float[] color = flaps.readRight(telemetry);
 
-            telemetry.addData("R0", "%s Color R 0", color[0]);
+            telemetry.addData("R0", "%s Color R 0 ", color[0]);
             telemetry.addData("R1", "%s Color R 1", color[1]);
             telemetry.update();
-            sleep(1000);
+            sleep(2000);
             float[] color2 = flaps.readRightAlt();
 
-            telemetry.addData("R0", "%s Color2", color2[0]);
-            telemetry.addData("R1", "%s Color2", color2[1]);
+            telemetry.addData("R0 alt", "%s Color2 ", color2[0]);
+            telemetry.addData("R1 alt", "%s Color2 ", color2[1]);
             telemetry.update();
-            sleep(1000);
+            sleep(2000);
             if (color[0] > color[1]) { //red
                 telemetry.addData("RED", "RED");
                 telemetry.update();
             }
             if (color[1] > color[0]) { //blue
-                telemetry.addData("RED", "RED");
+                telemetry.addData("BlUE", "BLUE");
                 telemetry.update();
             }
 
             //test 3
-            I2cDevice colori2c = hardwareMap.i2cDevice.get("rc");
-            colorx = new org.firstinspires.ftc.teamcode.ModernRoboticsI2cColorSensor2(colori2c.getI2cController(),colori2c.getPort());
-            int cnumber = colorx.colorNumber();
-            telemetry.addData("Colornumber: ",cnumber);
-            telemetry.update();
-            sleep(1000);
+            //I2cDevice colori2c = hardwareMap.i2cDevice.get("lc");
+            //colorx = new org.firstinspires.ftc.teamcode.ModernRoboticsI2cColorSensor2(colori2c.getI2cController(),colori2c.getPort());
+            //int cnumber = colorx.colorNumber();
+            //telemetry.addData("Colornumber: ",cnumber);
+            //telemetry.update();
+            //sleep(1000);
         }
     }
     //pull out to its own class
