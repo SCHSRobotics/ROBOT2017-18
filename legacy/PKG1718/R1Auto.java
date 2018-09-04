@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.legacy.PKG1718;
 
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cColorSensor;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -21,8 +21,8 @@ import org.firstinspires.ftc.teamcode.drivers.ServoFlapDriver1712;
  * FiringMechanism 1.0.0
 */
 
-@TeleOp(name="B1Auto", group="2017")
-public class B1Auto extends LinearOpMode {
+//@TeleOp(name="R1Auto", group="2017")
+public class R1Auto extends LinearOpMode {
     private MovementDriver drive;
     private DcMotor gun;
 
@@ -77,91 +77,53 @@ public class B1Auto extends LinearOpMode {
 //                    break;
 //                }
 //            }
-        //TODO: Lower Right arm
-
-        flaps.flapLeftDown();
+            //TODO: Lower Right arm
+        flaps.flapRightDown();
         sleep(2000);
 
         //TODO: read color
         float[] color = flaps.readRight(telemetry);
-
         int value = Float.compare(color[0],color[1]);
-        if(value > 0){ //red
-            telemetry.addData("RED", "RED");
+        if(value < 0){ //blue
+            telemetry.addData("BLUE ", "BLUE");
             telemetry.update();
             drive.setSpeed(.2f);
             sleep(400);
             drive.setSpeed(0);
-            flaps.flapLeftUp();
-            sleep(400);
+            flaps.flapRightUp();
+            sleep(750);
             drive.setSpeed(-.2f);
             sleep(400);
+            drive.setSpeed(-.7f);
+            sleep(1370);
         }
-        if(value < 0){ //blue
-            telemetry.addData("BLUE", "BLUE");
-            telemetry.update();
-            drive.setSpeed(-.2f);
+        if(value >0){ //red
+            telemetry.addData("RED", "RED");
+            drive.setSpeed(-.15f);
             sleep(500);
             drive.setSpeed(0);
-            //sleep(00);
-            flaps.flapLeftUp();
-            sleep(400);
+            flaps.flapRightUp();
+            drive.setSpeed(-.7f);
+            sleep(1300);
         }
-        flaps.flapLeftUp();
-        drive.setSpeed(-.7f);
-        sleep(1000);;
         drive.setSpeed(0);
 
-        //telemetry.addData("neither","neither");
-        //telemetry.update();
-        //leftgrabber.setPosition(0.7f);
-        //rightgrabber.setPosition(0.7f);
-        //sleep(400);
-        //drive.setSpeed(-1);
-        //sleep(100);
-        //drive.setSpeed(0);
-            /*color = flaps.readLeft(telemetry);
+            //TODO: if red rotate Couterclockwise
+            //TODO: if blue rotate clockwise
+            //TODO: Raise arm
+            //TODO: Recenter
+            //TODO: move forward to P(left), P(center), P(right)
+            //TODO: rotate clockwise
+            //TODO: drive fowards
+            //TODO: realease arm
+            //TODO: drive backwards
+            //TODO: close arm
+            //TODO: drive forward
+            //          }
 
-
-            telemetry.addData("R1", "%s Color L0", color[0]);
-            telemetry.update();
-            sleep(2000);
-            telemetry.addData("R1", "%s Color L1", color[1]);
-            telemetry.update();
-            sleep(2000);
-            telemetry.addData("R1", "%s Color L2", color[2]);
-            telemetry.update();
-            sleep(2000);
-            telemetry.addData("R1", "%s Color L3", color[4]);
-            telemetry.update();
-            sleep(2000);
-
-            //telemetry.addData("L1", "%s Color", color.toString());
-            //telemetry.addData("Q", "%s V", flaps.getValue());
-*/
-            /*telemetry.update();
-            sleep(2000);
-
-            int test = flaps.getValue();
-            telemetry.addData("R1", "%s Color value", test);
-            telemetry.update();
-*/
-        //flaps.flapRightUp();
-        //TODO: if red rotate Couterclockwise
-        //TODO: if blue rotate clockwise
-        //TODO: Raise arm
-        //TODO: Recenter
-        //TODO: move forward to P(left), P(center), P(right)
-        //TODO: rotate clockwise
-        //TODO: drive fowards
-        //TODO: realease arm
-        //TODO: drive backwards
-        //TODO: close arm
-        //TODO: drive forward
-        //          }
         while(this.opModeIsActive());
-    }
-    //pull out to its own class
+        }
+        //pull out to its own class
 
 
 

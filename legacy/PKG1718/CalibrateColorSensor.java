@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.legacy.PKG1718;
 
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cColorSensor;
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cColorSensor.Command;
@@ -28,7 +28,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
  * what a piece of code (including this one) does before running it.
  */
 
-@TeleOp(name = "Calibrate MR Color", group = "Utilities")
+//@TeleOp(name = "Calibrate MR Color", group = "Utilities")
 public class CalibrateColorSensor extends OpMode {
 
     // Color Sensor to calibrate. Require that it is a Modern Robotics sensor.

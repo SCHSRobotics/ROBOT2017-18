@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.legacy.PKG1718;
 
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cColorSensor;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -20,7 +20,7 @@ import org.firstinspires.ftc.teamcode.drivers.ServoFlapDriver1712;
  * FiringMechanism 1.0.0
 */
 
-@TeleOp(name="testColorSensor", group="2017")
+//@TeleOp(name="testColorSensor", group="2017")
 public class TestColorSensor extends LinearOpMode {
     private MovementDriver drive;
     private DcMotor gun;
