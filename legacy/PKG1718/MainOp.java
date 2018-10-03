@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.legacy.PKG1718;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.internal.opmode.TelemetryImpl;
@@ -18,7 +18,7 @@ import com.qualcomm.robotcore.hardware.Servo;
  * FiringMechanism 1.0.0
 */
 
-@TeleOp(name="Main Op", group="2017")
+//@TeleOp(name="Main Op", group="2017")
 public class MainOp extends LinearOpMode {
     private MovementDriver drive;
 

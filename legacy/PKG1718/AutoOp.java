@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.legacy.PKG1718;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -12,7 +12,7 @@ import org.firstinspires.ftc.teamcode.drivers.ServoFlapDriver1712;
 /**
  * Created by dylanbrophy on 12/3/2017.
  */
-@TeleOp(name="Auto Op 0x03FF", group="2017")
+//@TeleOp(name="Auto Op 0x03FF", group="2017")
 public class AutoOp extends LinearOpMode {
     private MovementDriver drive;
     private ServoFlapDriver1712 flaps;
