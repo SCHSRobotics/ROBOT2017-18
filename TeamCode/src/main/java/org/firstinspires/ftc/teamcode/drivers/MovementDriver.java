@@ -76,8 +76,8 @@ public class MovementDriver extends Driver {
         fl.setPower(-l);
         fr.setPower(-r);
         if(fourwheeldrive) {
-            bl.setPower(l);
-            br.setPower(r);
+            bl.setPower(-l);
+            br.setPower(-r);
         }
         speed=s;
     }
@@ -88,8 +88,8 @@ public class MovementDriver extends Driver {
         fl.setPower(-l);
         fr.setPower(-r);
         if(fourwheeldrive) {
-            bl.setPower(l);
-            br.setPower(r);
+            bl.setPower(-l);
+            br.setPower(-r);
         }
         rotspeed=s;
     }
@@ -111,9 +111,9 @@ public class MovementDriver extends Driver {
         fr.setPower(tx);
         if(fourwheeldrive) {
             //bl.setMode(DcMotorController.RunMode.RESET_ENCODERS);
-            bl.setPower(tx);
+            bl.setPower(-tx);
             //br.setMode(DcMotorController.RunMode.RESET_ENCODERS);
-            br.setPower(-tx);
+            br.setPower(tx);
         }
         rotspeed= (float) tx;
         speed=0;

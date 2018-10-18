@@ -27,6 +27,7 @@ public class ClubRush extends LinearOpMode {
         try {
             DcMotor[] tmp={hardwareMap.dcMotor.get("fl"),hardwareMap.dcMotor.get("fr"),hardwareMap.dcMotor.get("bl"),hardwareMap.dcMotor.get("br")}; //this is our rear wheel motors.
             drive=new MovementDriver();
+            drive.init(tmp, false);
             arm=hardwareMap.servo.get("arm");
             arm.setPosition(0);
         }catch (Exception e){
@@ -44,13 +45,13 @@ public class ClubRush extends LinearOpMode {
         boolean state=false;
         boolean ls=false;
         while (opModeIsActive()) {
-            drive.setRotspeed(gamepad2.left_stick_x*.7f);
+            drive.setRotspeed(gamepad2.left_stick_x*-.7f);
             drive.setSpeed(gamepad2.right_stick_y*.7f);
             if(gamepad2.a!=ls){
                 ls=gamepad2.a;
                 if(ls==true){
-                    if(state){
-                        arm.setPosition(180);
+                    if(!state){
+                        arm.setPosition(.5);
                     }else
                         arm.setPosition(0);
                     state=!state;
